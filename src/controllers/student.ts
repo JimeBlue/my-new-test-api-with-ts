@@ -1,6 +1,7 @@
 // TS: express has no built-in type info, so req/res need explicit types here (imported as types only, since they're never used as values at runtime)
 import { type Request, type Response } from "express";
 import Student from "#models/Student";
+import { studentSchema } from "#zod/studentSchema";
 
 // get all students
 export const getAllStudents = async (req: Request, res: Response) => {
@@ -34,7 +35,13 @@ export const getOneStudent = async (req: Request, res: Response) => {
 // create a student
 export const createStudent = async (req: Request, res: Response) => {
   try {
-    const { first_name, last_name, age, email } = req.body;
+    // TS: validate req.body before trusting it, since req.body has no guaranteed shape at runtime
+    const result = studentSchema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ msg: "Invalid student data", errors: result.error.issues });
+    }
+
+    const { first_name, last_name, age, email } = result.data;
     const student = await Student.create({ first_name, last_name, age, email });
     res.status(201).json({ msg: "student created successfully", student });
   } catch (error) {
@@ -46,7 +53,14 @@ export const createStudent = async (req: Request, res: Response) => {
 export const updateStudent = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { first_name, last_name, age, email } = req.body;
+
+    // TS: validate req.body before trusting it, since req.body has no guaranteed shape at runtime
+    const result = studentSchema.safeParse(req.body);
+    if (!result.success) {
+      return res.status(400).json({ msg: "Invalid student data", errors: result.error.issues });
+    }
+
+    const { first_name, last_name, age, email } = result.data;
 
     const student = await Student.findByIdAndUpdate(
       id,
