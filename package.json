@@ -1,14 +1,14 @@
 {
   "name": "my-new-test-api-with-ts",
  "version": "1.0.0",
-    "main": "app.ts",
+    "main": "src/server.ts",
     "type": "module",
     "scripts": {
-        "dev": "node --watch --conditions development src/app.ts", 
+        "dev": "node --watch --env-file=.env --conditions development src/server.ts",
         "prebuild": "rm -rf dist",
         "build": "tsc",
         "prestart": "npm run build",
-        "start": "node dist/app.js"
+        "start": "node --env-file=.env dist/server.js"
     },
     "imports": {
         "#utils": {
