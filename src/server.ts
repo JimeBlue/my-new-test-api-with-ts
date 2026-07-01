@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import connectDB from "./dbinit.ts";
+import student from "#routes/student";
 
 // Initialize the Express application instance
 const app = express();
@@ -18,6 +19,9 @@ app.use(cors()); // allow requests from other origins (e.g. a frontend running o
 app.get("/", (req, res) => {
   res.send("hello world");
 });
+
+// where: path + the what: my routes
+app.use("/api/v1/students", student);
 
 // listen expects a port, which was declared at top, and a callback function
 app.listen(port, () => {
