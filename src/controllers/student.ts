@@ -1,7 +1,9 @@
+// TS: express has no built-in type info, so req/res need explicit types here (imported as types only, since they're never used as values at runtime)
+import { type Request, type Response } from "express";
 import Student from "#models/Student";
 
 // get all students
-export const getAllStudents = async (req, res) => {
+export const getAllStudents = async (req: Request, res: Response) => {
   try {
     const students = await Student.find();
     if (!students.length) {
@@ -15,7 +17,7 @@ export const getAllStudents = async (req, res) => {
 };
 
 // get one student
-export const getOneStudent = async (req, res) => {
+export const getOneStudent = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const student = await Student.findById(id);
@@ -30,7 +32,7 @@ export const getOneStudent = async (req, res) => {
 };
 
 // create a student
-export const createStudent = async (req, res) => {
+export const createStudent = async (req: Request, res: Response) => {
   try {
     const { first_name, last_name, age, email } = req.body;
     const student = await Student.create({ first_name, last_name, age, email });
@@ -41,7 +43,7 @@ export const createStudent = async (req, res) => {
 };
 
 // update a student
-export const updateStudent = async (req, res) => {
+export const updateStudent = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { first_name, last_name, age, email } = req.body;
@@ -70,7 +72,7 @@ export const updateStudent = async (req, res) => {
 };
 
 // delete a student
-export const deleteStudent = async (req, res) => {
+export const deleteStudent = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const student = await Student.findByIdAndDelete(id);
