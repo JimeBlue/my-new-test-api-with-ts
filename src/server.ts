@@ -1,11 +1,16 @@
-import { pickRandom } from '#utils';
+import express from "express";
 
-console.log(pickRandom([1, 2, 3, 4, 5]));
-console.log(pickRandom(['apple', 'banana', 'cherry']));
-console.log(pickRandom([]));
-console.log(pickRandom([true, false, true]));
-console.log(pickRandom(['red', 'green', 'blue', 'yellow']));
-console.log(pickRandom([null, undefined, 42]));
-console.log(pickRandom(['a', 'b', 'c', 'd', 'e', 'f', 'g']));
-console.log(pickRandom([1.1, 2.2, 3.3, 4.4, 5.5]));
-console.log(pickRandom(['x', 'y', 'z', 'w', 'v']));
+// Initialize the Express application instance
+const app = express();
+
+const port = process.env.PORT || 8080;
+
+// app.get--> 2 arguments: where (location) and what (request and response)
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
+
+// listen expects a port, which was declared at top, and a callback function
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
