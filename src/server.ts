@@ -1,8 +1,12 @@
 import express from "express";
 import cors from "cors";
+import connectDB from "./dbinit.ts";
 
 // Initialize the Express application instance
 const app = express();
+
+// connect mongoDB
+await connectDB();
 
 const port = process.env.PORT || 8080;
 
