@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import connectDB from "./dbinit.ts";
 import student from "#routes/student";
+import teacher from "#routes/teacher";
 
 // Initialize the Express application instance
 const app = express();
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 
 // where: path + the what: my routes
 app.use("/api/v1/students", student);
+app.use("/api/v1/teachers", teacher);
 
 // listen expects a port, which was declared at top, and a callback function
 app.listen(port, () => {

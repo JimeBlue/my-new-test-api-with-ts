@@ -43,6 +43,6 @@ const TeacherSchema = new mongoose.Schema<ITeacher>({
   },
 });
 
-// Build a "Teacher" model from the schema above and export it so other files to use it to create, read, update, and delete student records in MongoDB.
-// TS 3) passing IStudent here means anywhere this model is used, TypeScript knows the shape of a Student document instead of treating it as any
-export default mongoose.model<ITeacher>("Student", TeacherSchema);
+// Build a "Teacher" model from the schema above and export it so other files to use it to create, read, update, and delete teacher records in MongoDB.
+// TS 3) passing ITeacher here means anywhere this model is used, TypeScript knows the shape of a Teacher document instead of treating it as any
+export default mongoose.model<ITeacher>("Teacher", TeacherSchema);
