@@ -1,18 +1,18 @@
 //use mongoose to create the schema
 import mongoose from "mongoose";
 
-// TS 1) this interface describes the shape of a Student document. It's passed as the type argument to Schema<T>/model<T> (which are generic),
+// TS 1) this interface describes the shape of a Teacher document. It's passed as the type argument to Schema<T>/model<T> (which are generic),
 // so TypeScript gives typed results everywhere the model is used (e.g. controllers)
-export interface IStudent {
+export interface ITeacher {
   first_name: string;
   last_name: string;
-  age: number;
   email: string;
+  subject: string;
 }
 
 // name should be: topic + wording Schema
-// TS 2) passing IStudent here makes TypeScript check that these fields actually match the interface
-const StudentSchema = new mongoose.Schema<IStudent>({
+// TS 2) passing ITeacher here makes TypeScript check that these fields actually match the interface
+const TeacherSchema = new mongoose.Schema<ITeacher>({
   first_name: {
     type: String,
     required: true,
@@ -25,12 +25,7 @@ const StudentSchema = new mongoose.Schema<IStudent>({
     minLength: [2, "min length is 2 chars"],
     maxLength: [50, "max length is 50 chars"],
   },
-  age: {
-    type: Number,
-    required: true,
-    min: 6,
-    max: 30,
-  },
+
   email: {
     type: String,
     required: true,
@@ -40,8 +35,14 @@ const StudentSchema = new mongoose.Schema<IStudent>({
       "Please use a valid email address",
     ],
   },
+  subject: {
+    type: String,
+    required: true,
+    minLength: [2, "min length is 2 chars"],
+    maxLength: [50, "max length is 50 chars"],
+  },
 });
 
-// Build a "Student" model from the schema above and export it so other files to use it to create, read, update, and delete student records in MongoDB.
+// Build a "Teacher" model from the schema above and export it so other files to use it to create, read, update, and delete student records in MongoDB.
 // TS 3) passing IStudent here means anywhere this model is used, TypeScript knows the shape of a Student document instead of treating it as any
-export default mongoose.model<IStudent>("Student", StudentSchema);
+export default mongoose.model<ITeacher>("Student", TeacherSchema);
