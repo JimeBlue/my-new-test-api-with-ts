@@ -71,7 +71,7 @@ export const updateStudent = async (req: Request, res: Response) => {
         email,
       },
       {
-        new: true,
+        returnDocument: "after",
       },
     );
 
