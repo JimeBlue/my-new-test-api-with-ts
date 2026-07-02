@@ -4,7 +4,7 @@ import Teacher from "#models/Teacher";
 import { teacherSchema } from "#zod/teacherSchema";
 
 // get all teachers
-export const getAllTeacher = async (req: Request, res: Response) => {
+export const getAllTeachers = async (req: Request, res: Response) => {
   try {
     const teachers = await Teacher.find();
     if (!teachers.length) {
